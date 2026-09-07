@@ -11,7 +11,6 @@ export function ContentSections() {
             <li>
               Gestione completa delle operazioni contrattuali domestiche e
               business: Switch, Volture (sia abbinate a Switch che Interne),
-              Subentri e Nuovi Allacci
             </li>
             <li>
               Inserimento contratti tramite portale Plenitude (SalesUp) con firma grafometrica.
