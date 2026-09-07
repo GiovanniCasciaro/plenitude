@@ -5,10 +5,10 @@ export function SiteHeader() {
   return (
     <header className="site-header" id="top">
       <nav className="nav" aria-label="Navigazione principale">
-        <Link className="logo" href="/" aria-label="Plenitude Leader - Home">
+        <Link className="logo" href="/" aria-label="Plenitude Dealer - Home">
           <Image
             src="/assets/logo-plenitude.svg"
-            alt="Plenitude Leader"
+            alt="Plenitude Dealer"
             width={180}
             height={176}
             className="logo-image"

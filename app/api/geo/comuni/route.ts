@@ -16,7 +16,5 @@ export async function GET(request: Request) {
   }
 
   const comuni = await searchComuni(sigla, query);
-  return NextResponse.json({
-    comuni: comuni.slice(0, 80),
-  });
+  return NextResponse.json({ comuni });
 }

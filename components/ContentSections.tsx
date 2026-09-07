@@ -3,7 +3,7 @@ export function ContentSections() {
     <>
       <section className="section" id="cosa-offriamo">
         <div className="section-head">
-          <p className="eyebrow-line">Partner Plenitude Leader</p>
+          <p className="eyebrow-line">Partner Plenitude Dealer</p>
           <h2>Cosa Offriamo</h2>
         </div>
         <div className="content-card">
@@ -14,25 +14,14 @@ export function ContentSections() {
               Subentri e Nuovi Allacci
             </li>
             <li>
-              Inserimento contratti tramite portale Plenitude Leader (firma OTP o cartacea)
+              Inserimento contratti tramite portale Plenitude (SalesUp) con firma grafometrica.
             </li>
             <li>
               Operatività immediata: la pratica si inserisce in 2 minuti, senza
-              allegati. Il portale Plenitude Leader è un gestionale tutto-in-uno che integra
-              caricamento contratti, verifica e post-vendita in un&apos;unica
-              piattaforma.
+              allegati, tramite il portale Plenitude dedicato per inserimento in autonomia.
             </li>
             <li>
-              Post-vendita strutturato: supporto su fatture, cessazioni,
-              variazioni di potenza, etc...
-            </li>
-            <li>
-              Supporto garantito: numero verde dedicato per la risoluzione delle
-              problematiche
-            </li>
-            <li>
-              Offerte low cost garantite per tutto il 2026, con un programma
-              d&apos;azione stabilito fino al 2030.
+              Offerte low cost garantite per quasi l'interezza dell'anno solare.
             </li>
           </ul>
         </div>
@@ -41,7 +30,7 @@ export function ContentSections() {
       <section className="section section-alt" id="offerte-attive">
         <div className="section-head">
           <p className="eyebrow-line">Tariffe</p>
-          <h2>Un catalogo completo Luce, Gas, Fibra e prodotti Tech</h2>
+          <h2>Un catalogo completo Luce, Gas, Fibra </h2>
         </div>
         <div className="content-card">
           <p>
@@ -68,8 +57,7 @@ export function ContentSections() {
         <div className="content-card">
           <p>
             Il nostro sistema di compensi cresce con te: più produci, più
-            guadagni, con un bonus dedicato ai contratti che restano attivi nel
-            tempo.
+            guadagni, con gettoni massimi a partire da pochi inserimenti.
           </p>
           <p className="commission-note" style={{ marginTop: "1.25rem" }}>
             Ti presentiamo tutte le condizioni economiche nel dettaglio con una
@@ -90,12 +78,12 @@ export function ContentSections() {
               qui riportato.
             </li>
             <li>
-              Dopo l&apos;approvazione di Plenitude Leader, provvederemo all&apos;invio del
+              Dopo l&apos;approvazione di Plenitude, provvederemo all&apos;invio del
               contratto via mail per la firma digitale.
             </li>
             <li>
               Dovrà allegare: documento di identità e visura camerale (non
-              antecedente a 6 mesi).
+              antecedente a 6 mesi), e allegato 7 da compilare.
             </li>
           </ul>
         </div>

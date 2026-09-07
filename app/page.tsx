@@ -12,12 +12,12 @@ export default function HomePage() {
         <section className="page-hero">
           <p className="eyebrow-line">Collabora con noi</p>
           <h1>
-            Plenitude Leader: energia, processi digitali e supporto dedicato per
-            la tua agenzia
+            Plenitude Dealer: energia, processi digitali e supporto dedicato per
+            la tua agenzia o negozio
           </h1>
           <p className="hero-subtitle">
             Offerte competitive, compensi strutturati e operatività immediata
-            tramite il portale Plenitude Leader per la tua agenzia.
+            tramite il portale Plenitude.
           </p>
         </section>
 

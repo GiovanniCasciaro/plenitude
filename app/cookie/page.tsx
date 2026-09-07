@@ -5,9 +5,9 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { getLegalEntity } from "@/lib/legal";
 
 export const metadata: Metadata = {
-  title: "Cookie Policy — Plenitude Leader",
+  title: "Cookie Policy — Plenitude Dealer",
   description:
-    "Informativa sui cookie utilizzati dal sito Plenitude Leader ai sensi della normativa vigente.",
+    "Informativa sui cookie utilizzati dal sito Plenitude Dealer ai sensi della normativa vigente.",
   robots: { index: true, follow: true },
 };
 

@@ -15,7 +15,7 @@ export default function AnteprimaPage() {
       <a
         className="preview-collage"
         href={PREVIEW_SITE_URL}
-        aria-label="Vai al sito Plenitude Leader"
+        aria-label="Vai al sito Plenitude Dealer"
       >
         <div className="preview-collage__bar" aria-hidden="true" />
         <div className="preview-collage__body">
@@ -49,7 +49,7 @@ export default function AnteprimaPage() {
 
           <div className="preview-collage__cta">
             <div>
-              <strong>Scopri Plenitude Leader</strong>
+              <strong>Scopri Plenitude Dealer</strong>
               <br />
               <span>plenitudeleader.it</span>
             </div>

@@ -1,4 +1,4 @@
-# Plenitude Leader — Prossime cose da fare
+# Plenitude Dealer — Prossime cose da fare
 
 Checklist operativa per allineare questo progetto a quanto già fatto su **Iren Corner** (`~/Desktop/irencorner`).
 
@@ -12,7 +12,7 @@ Checklist operativa per allineare questo progetto a quanto già fatto su **Iren 
 
 - [x] Form candidatura + validazione Zod + honeypot + rate limit
 - [x] Campi Area Manager + telefono (esclusi dall’Excel, visibili in admin/email)
-- [x] Excel Plenitude Leader: Rag. Sociale, Partita IVA, Nome, Cognome, Indirizzo, Numero civico, CAP, Comune, Provincia, Regione
+- [x] Excel Plenitude Dealer: Rag. Sociale, Partita IVA, Nome, Cognome, Indirizzo, Numero civico, CAP, Comune, Provincia, Regione
 - [x] Generazione Excel per candidatura
 - [x] Storage locale (`./data`) e Blob-ready (`lib/store.ts` + `lib/mailbox.ts`)
 - [x] Autocomplete comuni (`lib/data/comuni.json`)
@@ -21,7 +21,7 @@ Checklist operativa per allineare questo progetto a quanto già fatto su **Iren 
 - [x] Admin: tab da leggere / lette / cestino, ricerca e filtri
 - [x] Anteprima email (`/anteprima`)
 - [x] Privacy / Cookie policy
-- [x] Branding Plenitude Leader + logo
+- [x] Branding Plenitude Dealer + logo
 - [x] `.env.local` locale per accedere all’admin
 
 ### Gap codice rispetto a Iren Corner (piccolo)
@@ -62,7 +62,7 @@ Riferimento Iren Corner: stesso flusso descritto in `irencorner/README.md` → s
 ## 3. Storage = Vercel Blob (il “DB” di Iren Corner)
 
 1. Nel progetto Vercel: **Storage → Blob → Create**.
-2. Collega lo store al progetto Plenitude Leader.
+2. Collega lo store al progetto Plenitude Dealer.
 3. Vercel aggiunge automaticamente:
    - `BLOB_READ_WRITE_TOKEN`
    - (eventualmente) `BLOB_STORE_ID`
@@ -90,7 +90,7 @@ Copia i valori in **Project → Settings → Environment Variables** (Production
 | `ADMIN_PASSWORD` | Sì | Password forte (diversa da quella di sviluppo) |
 | `SESSION_SECRET` | Sì | Stringa casuale ≥ 32 caratteri |
 | `RESEND_API_KEY` | Sì (per email) | Da [resend.com](https://resend.com) |
-| `RESEND_FROM` | Sì (per email) | Es. `Plenitude Leader <noreply@tuodominio.it>` — dominio verificato su Resend |
+| `RESEND_FROM` | Sì (per email) | Es. `Plenitude Dealer <noreply@tuodominio.it>` — dominio verificato su Resend |
 | `NOTIFIER_EMAIL` | Sì (per email) | Destinatario avviso nuova candidatura |
 | `APP_URL` | Sì | URL pubblico, es. `https://tuodominio.it` (link nell’email admin) |
 | `LEGAL_ENTITY_NAME` | Consigliata | Titolare trattamento |
@@ -110,7 +110,7 @@ Come su Iren Corner:
 2. Verifica il dominio mittente (o, in test, usa solo l’indirizzo sandbox Resend).
 3. Imposta su Vercel:
    - `RESEND_API_KEY`
-   - `RESEND_FROM="Plenitude Leader <noreply@tuodominio.it>"`
+   - `RESEND_FROM="Plenitude Dealer <noreply@tuodominio.it>"`
    - `NOTIFIER_EMAIL="..."` (dove vuoi ricevere gli avvisi)
    - `APP_URL="https://tuodominio.it"`
 4. Redeploy dopo aver salvato le variabili.
@@ -164,7 +164,7 @@ In produzione usa password e `SESSION_SECRET` **diversi**.
 
 ## Riferimento Iren Corner
 
-| Cosa | Iren Corner | Plenitude Leader |
+| Cosa | Iren Corner | Plenitude Dealer |
 |------|-------------|------------------|
 | Cartella | `~/Desktop/irencorner` | `~/Desktop/enova` |
 | Repo | `GiovanniCasciaro/irencorner` | da creare |

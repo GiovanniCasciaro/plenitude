@@ -5,7 +5,7 @@
 }
 
 :root {
-  /* Colori istituzionali Plenitude Leader */
+  /* Colori istituzionali Plenitude Dealer */
   --enova-primary: #009e62;
   --enova-primary-dark: #007a4c;
   --enova-accent: #ffcd00;
@@ -538,6 +538,19 @@ input:disabled {
   background: var(--bg-soft);
   color: var(--muted);
   cursor: not-allowed;
+}
+
+input:read-only {
+  background: var(--bg-soft);
+  color: var(--text);
+  cursor: default;
+}
+
+.field-hint {
+  margin: 0;
+  font-size: 0.78rem;
+  line-height: 1.35;
+  color: var(--muted);
 }
 
 .hp-field {

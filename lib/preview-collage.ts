@@ -2,10 +2,10 @@ export const PREVIEW_SITE_URL =
   process.env.APP_URL?.replace(/\/$/, "") ?? "https://plenitudeleader.it";
 
 export const PREVIEW_HEADLINE =
-  "Energia, processi digitali e supporto dedicato per la tua agenzia";
+  "Energia, processi digitali e supporto dedicato per la tua agenzia o negozio";
 
 export const PREVIEW_SUBLINE =
-  "Catalogo Luce, Gas, Fibra e Tech, compensi competitivi e operatività immediata con il portale Plenitude Leader.";
+  "Catalogo Luce, Gas, Fibra e Tech, compensi competitivi e operatività immediata con il portale Plenitude Dealer.";
 
 export const PREVIEW_TILES = [
   {

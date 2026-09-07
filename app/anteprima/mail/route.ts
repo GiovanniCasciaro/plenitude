@@ -39,7 +39,7 @@ export async function GET(request: Request) {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Plenitude Leader — Anteprima</title>
+  <title>Plenitude Dealer — Anteprima</title>
 </head>
 <body style="margin:0;padding:24px;background:#eef6f1;">
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
@@ -48,13 +48,13 @@ export async function GET(request: Request) {
         <table width="600" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;width:100%;">
           <tr>
             <td style="padding-bottom:16px;font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#5a6478;text-align:center;">
-              Anteprima Plenitude Leader · <a href="${siteUrl}" style="color:#009e62;">${escapeHtml(siteUrl.replace(/^https?:\/\//, ""))}</a>
+              Anteprima Plenitude Dealer · <a href="${siteUrl}" style="color:#009e62;">${escapeHtml(siteUrl.replace(/^https?:\/\//, ""))}</a>
             </td>
           </tr>
           <tr>
             <td>
               <a href="${siteUrl}" style="text-decoration:none;display:block;">
-                <img src="${imageUrl}" width="600" alt="Plenitude Leader — ${escapeHtml(PREVIEW_HEADLINE)}" style="display:block;width:100%;max-width:600px;height:auto;border:0;border-radius:16px;">
+                <img src="${imageUrl}" width="600" alt="Plenitude Dealer — ${escapeHtml(PREVIEW_HEADLINE)}" style="display:block;width:100%;max-width:600px;height:auto;border:0;border-radius:16px;">
               </a>
             </td>
           </tr>
@@ -76,7 +76,7 @@ export async function GET(request: Request) {
                     <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:14px;background:#009e62;border-radius:12px;">
                       <tr>
                         <td style="padding:16px 18px;font-family:Arial,Helvetica,sans-serif;">
-                          <a href="${siteUrl}" style="color:#ffffff;text-decoration:none;font-size:18px;font-weight:700;">Scopri Plenitude Leader → plenitudeleader.it</a>
+                          <a href="${siteUrl}" style="color:#ffffff;text-decoration:none;font-size:18px;font-weight:700;">Scopri Plenitude Dealer → plenitudeleader.it</a>
                         </td>
                       </tr>
                     </table>

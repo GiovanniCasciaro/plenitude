@@ -1,5 +1,5 @@
 export const SUBMIT_SUCCESS_MESSAGE =
-  "Richiesta inviata con successo. Dopo l'approvazione di Plenitude Leader riceverai il contratto via email per la firma digitale.";
+  "Richiesta inviata con successo. Dopo l'approvazione di Plenitude riceverai il contratto via email per la firma digitale.";
 
 export function isBrowserFormSubmit(request: Request) {
   const fetchMode = request.headers.get("sec-fetch-mode");

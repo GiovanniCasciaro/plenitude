@@ -5,9 +5,9 @@ const siteUrl = process.env.APP_URL ?? "https://plenitudeleader.it";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "Plenitude Leader — Anteprima",
+  title: "Plenitude Dealer — Anteprima",
   description:
-    "Anteprima grafica del programma commerciale Plenitude Leader per condivisione via email.",
+    "Anteprima grafica del programma commerciale Plenitude Dealer per condivisione via email.",
   robots: {
     index: false,
     follow: false,

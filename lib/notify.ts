@@ -42,12 +42,12 @@ export async function notifyNewSubmission(
 
   const resend = new Resend(apiKey);
   const from =
-    process.env.RESEND_FROM ?? "Plenitude Leader <onboarding@resend.dev>";
+    process.env.RESEND_FROM ?? "Plenitude Dealer <onboarding@resend.dev>";
   const adminUrl = getAdminSubmissionUrl(submission.id, request);
   const createdAt = formatDate(submission.createdAt);
 
   const text = [
-    "È disponibile una nuova codifica su Plenitude Leader.",
+    "È disponibile una nuova codifica su Plenitude Dealer.",
     "",
     `Area Manager: ${submission.areaManagerNome ?? ""} ${submission.areaManagerCognome ?? ""}`.trim(),
     `Ragione sociale: ${submission.ragioneSociale}`,
@@ -61,7 +61,7 @@ export async function notifyNewSubmission(
   ].join("\n");
 
   const html = `
-    <p>È disponibile una nuova codifica su <strong>Plenitude Leader</strong>.</p>
+    <p>È disponibile una nuova codifica su <strong>Plenitude Dealer</strong>.</p>
     <ul>
       <li><strong>Area Manager:</strong> ${escapeHtml(submission.areaManagerNome ?? "")} ${escapeHtml(submission.areaManagerCognome ?? "")}</li>
       <li><strong>Ragione sociale:</strong> ${escapeHtml(submission.ragioneSociale)}</li>
@@ -77,7 +77,7 @@ export async function notifyNewSubmission(
   const { error } = await resend.emails.send({
     from,
     to: getNotifierEmail(),
-    subject: `Nuova codifica Plenitude Leader — ${submission.ragioneSociale}`,
+    subject: `Nuova codifica Plenitude Dealer — ${submission.ragioneSociale}`,
     text,
     html,
   });

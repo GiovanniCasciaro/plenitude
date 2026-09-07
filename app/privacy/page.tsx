@@ -5,7 +5,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { getLegalEntity } from "@/lib/legal";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy — Plenitude Leader",
+  title: "Privacy Policy — Plenitude Dealer",
   description:
     "Informativa sul trattamento dei dati personali ai sensi del Regolamento (UE) 2016/679 (GDPR).",
   robots: { index: true, follow: true },
@@ -108,7 +108,7 @@ export default function PrivacyPage() {
               I dati possono essere comunicati a soggetti autorizzati dal
               Titolare, a fornitori di servizi tecnici (hosting, storage, email)
               nominati responsabili del trattamento, e — ove necessario — a
-              Plenitude Leader
+              Plenitude Dealer
               o società del gruppo per la valutazione del mandato commerciale.
               Eventuali trasferimenti extra-UE avvengono solo con garanzie
               adeguate previste dal GDPR.

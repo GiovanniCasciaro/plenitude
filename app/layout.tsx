@@ -10,9 +10,9 @@ const inter = Inter({
 });
 
 const siteUrl = process.env.APP_URL ?? "https://plenitudeleader.it";
-const siteTitle = "Plenitude Leader — Collabora con noi";
+const siteTitle = "Plenitude Dealer — Collabora con noi";
 const siteDescription =
-  "Programma commerciale Plenitude Leader: offerte energia, provvigioni strutturate e form di candidatura partner per agenzie.";
+  "Programma commerciale Plenitude Dealer: offerte energia, provvigioni strutturate e form di candidatura partner per agenzie.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "it_IT",
     url: "/",
-    siteName: "Plenitude Leader",
+    siteName: "Plenitude Dealer",
     title: siteTitle,
     description: siteDescription,
   },

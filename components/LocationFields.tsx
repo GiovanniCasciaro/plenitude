@@ -61,24 +61,23 @@ export function LocationFields({ resetKey = 0 }: { resetKey?: number }) {
     return () => controller.abort();
   }, [provincia]);
 
-  const comuneSuggestions = useMemo(() => {
-    const query = comune.trim().toLowerCase();
-    const filtered = query
-      ? comuni.filter((item) => item.nome.toLowerCase().includes(query))
-      : comuni;
-
-    return filtered.slice(0, 40);
-  }, [comuni, comune]);
-
   function applyComuneSelection(value: string) {
     setComune(value);
+
+    if (!value) {
+      setCapOptions([]);
+      setCap("");
+      return;
+    }
+
     const match = comuni.find(
       (item) => item.nome.toLowerCase() === value.trim().toLowerCase(),
     );
 
     if (match) {
-      setCapOptions(match.cap);
-      setCap(match.cap[0] ?? "");
+      const caps = match.cap.filter(Boolean);
+      setCapOptions(caps);
+      setCap(caps[0] ?? "");
       return;
     }
 
@@ -100,6 +99,9 @@ export function LocationFields({ resetKey = 0 }: { resetKey?: number }) {
     setCap("");
     setCapOptions([]);
   }
+
+  const capLocked = Boolean(comune) && capOptions.length === 1;
+  const capNeedsChoice = capOptions.length > 1;
 
   return (
     <>
@@ -147,33 +149,32 @@ export function LocationFields({ resetKey = 0 }: { resetKey?: number }) {
       <div className="input-row">
         <div className="input-group">
           <label htmlFor="comune">Comune (sede operativa)</label>
-          <input
+          <select
             id="comune"
             name="comune"
-            list="comuni-list"
             value={comune}
             onChange={(event) => applyComuneSelection(event.target.value)}
-            placeholder={
-              loadingComuni
+            required
+            disabled={!provincia || loadingComuni || comuni.length === 0}
+          >
+            <option value="">
+              {loadingComuni
                 ? "Caricamento comuni..."
                 : provincia
-                  ? "Cerca o seleziona comune"
-                  : "Seleziona prima la provincia"
-            }
-            required
-            disabled={!provincia || loadingComuni}
-            autoComplete="address-level2"
-          />
-          <datalist id="comuni-list">
-            {comuneSuggestions.map((item) => (
-              <option key={item.nome} value={item.nome} />
+                  ? "Seleziona comune"
+                  : "Seleziona prima la provincia"}
+            </option>
+            {comuni.map((item) => (
+              <option key={item.nome} value={item.nome}>
+                {item.nome}
+              </option>
             ))}
-          </datalist>
+          </select>
         </div>
 
         <div className="input-group">
           <label htmlFor="cap">Cap (sede operativa)</label>
-          {capOptions.length > 1 ? (
+          {capNeedsChoice ? (
             <select
               id="cap"
               name="cap"
@@ -181,7 +182,6 @@ export function LocationFields({ resetKey = 0 }: { resetKey?: number }) {
               onChange={(event) => setCap(event.target.value)}
               required
             >
-              <option value="">Seleziona CAP</option>
               {capOptions.map((item) => (
                 <option key={item} value={item}>
                   {item}
@@ -193,14 +193,26 @@ export function LocationFields({ resetKey = 0 }: { resetKey?: number }) {
               id="cap"
               name="cap"
               value={cap}
-              onChange={(event) => setCap(event.target.value)}
-              placeholder="20100"
+              onChange={(event) => {
+                if (!capLocked) setCap(event.target.value);
+              }}
+              placeholder={
+                comune ? "Compilato automaticamente" : "Seleziona prima il comune"
+              }
               required
-              readOnly={capOptions.length === 1}
+              readOnly={capLocked || !comune}
               inputMode="numeric"
               autoComplete="postal-code"
+              aria-describedby="cap-hint"
             />
           )}
+          <p id="cap-hint" className="field-hint">
+            {capNeedsChoice
+              ? "Comune con più CAP: verifica o cambia se necessario."
+              : capLocked
+                ? "Compilato automaticamente dal comune selezionato."
+                : "Si compila automaticamente dopo la selezione del comune."}
+          </p>
         </div>
       </div>
     </>

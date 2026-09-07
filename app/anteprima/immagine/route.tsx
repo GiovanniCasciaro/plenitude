@@ -62,7 +62,7 @@ export async function GET() {
                 color: "#009e62",
               }}
             >
-              Plenitude Leader
+              Plenitude Dealer
             </span>
           </div>
 
@@ -178,7 +178,7 @@ export async function GET() {
                   marginBottom: 4,
                 }}
               >
-                Scopri Plenitude Leader
+                Scopri Plenitude Dealer
               </p>
               <p style={{ display: "flex", fontSize: 16, opacity: 0.92 }}>
                 plenitudeleader.it

@@ -302,7 +302,7 @@ export function PartnerForm() {
           <input type="checkbox" name="marketingConsent" value="on" />
           <span>
             Acconsento a ricevere comunicazioni informative e commerciali
-            relative a offerte e opportunità del programma Plenitude Leader.{" "}
+            relative a offerte e opportunità del programma Plenitude Dealer.{" "}
             <em>(facoltativo)</em>
           </span>
         </label>

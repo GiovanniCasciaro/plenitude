@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "Plenitude Leader — Collabora con noi";
+export const alt = "Plenitude Dealer — Collabora con noi";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -56,7 +56,7 @@ export default function OpenGraphImage() {
               marginBottom: 28,
             }}
           >
-            Plenitude Leader
+            Plenitude Dealer
           </h1>
           <p
             style={{
@@ -66,7 +66,7 @@ export default function OpenGraphImage() {
               maxWidth: 920,
             }}
           >
-            Energia, processi digitali e supporto dedicato per la tua agenzia
+            Energia, processi digitali e supporto dedicato per la tua agenzia o negozio
           </p>
         </div>
         <p
