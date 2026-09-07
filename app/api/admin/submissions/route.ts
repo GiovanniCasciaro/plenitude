@@ -13,7 +13,7 @@ export async function GET() {
     submissions: submissions.map((submission) => ({
       id: submission.id,
       createdAt: submission.createdAt,
-      email: submission.email,
+      email: submission.email ?? "",
       ragioneSociale: submission.ragioneSociale,
       partitaIva: submission.partitaIva,
       provincia: submission.provincia,

@@ -3,6 +3,7 @@ import JSZip from "jszip";
 import {
   EXCEL_COLUMN_COUNT,
   EXCEL_HEADERS,
+  EXCEL_LEGAL_COLUMN_COUNT,
   EXCEL_RANGE,
   FIELD_KEYS,
 } from "@/lib/fields";
@@ -36,9 +37,9 @@ export function buildExcelFileName(submission: Pick<Submission, "ragioneSociale"
   return `candidatura-${slug}.xlsx`;
 }
 
-/** Colonne A–E legali (blu), F–M operative (arancio). */
+/** Colonne A–D anagrafiche (blu), E–J sede (arancio). */
 function headerFillForIndex(index: number) {
-  if (index < 5) return LEGAL_FILL;
+  if (index < EXCEL_LEGAL_COLUMN_COUNT) return LEGAL_FILL;
   return OPERATIVO_FILL;
 }
 

@@ -79,16 +79,26 @@ export function PartnerForm() {
     (field) => field.section === "areaManager",
   );
   const legalFields = FORM_FIELDS.filter((field) => field.section === "legal");
+  const legalContactFields = legalFields.filter((field) =>
+    ["email", "telefono"].includes(field.key),
+  );
+  const titolareFields = legalFields.filter((field) =>
+    ["nome", "cognome"].includes(field.key),
+  );
+  const remainingLegalFields = legalFields.filter(
+    (field) =>
+      !["email", "telefono", "nome", "cognome"].includes(field.key),
+  );
   const profileFields = FORM_FIELDS.filter(
     (field) =>
       field.section === "operativo" &&
       !["regione", "provincia", "comune", "cap"].includes(field.key),
   );
-  const indirizzoField = profileFields.find(
-    (field) => field.key === "indirizzoOperativo",
+  const addressFields = profileFields.filter((field) =>
+    ["indirizzoOperativo", "numeroCivico"].includes(field.key),
   );
   const remainingProfileFields = profileFields.filter(
-    (field) => field.key !== "indirizzoOperativo",
+    (field) => !["indirizzoOperativo", "numeroCivico"].includes(field.key),
   );
 
   return (
@@ -125,7 +135,7 @@ export function PartnerForm() {
       <div className="form-section form-section--legal">
         <h3>Dati legali e contatto</h3>
         <div className="input-row">
-          {legalFields.slice(0, 2).map((field) => (
+          {legalContactFields.map((field) => (
             <div className="input-group" key={field.key}>
               <label htmlFor={field.key}>{field.label}</label>
               <input
@@ -145,7 +155,24 @@ export function PartnerForm() {
             </div>
           ))}
         </div>
-        {legalFields.slice(2).map((field) => (
+        <div className="input-row">
+          {titolareFields.map((field) => (
+            <div className="input-group" key={field.key}>
+              <label htmlFor={field.key}>{field.label}</label>
+              <input
+                id={field.key}
+                name={field.key}
+                type="text"
+                placeholder={field.placeholder}
+                required
+                autoComplete={
+                  field.key === "nome" ? "given-name" : "family-name"
+                }
+              />
+            </div>
+          ))}
+        </div>
+        {remainingLegalFields.map((field) => (
           <div className="input-group" key={field.key}>
             <label htmlFor={field.key}>{field.label}</label>
             <input
@@ -161,19 +188,25 @@ export function PartnerForm() {
 
       <div className="form-section form-section--operativo">
         <h3>Sede operativa e profilo commerciale</h3>
-        {indirizzoField ? (
-          <div className="input-group">
-            <label htmlFor={indirizzoField.key}>{indirizzoField.label}</label>
-            <input
-              id={indirizzoField.key}
-              name={indirizzoField.key}
-              type="text"
-              placeholder={indirizzoField.placeholder}
-              required
-              autoComplete="street-address"
-            />
-          </div>
-        ) : null}
+        <div className="input-row">
+          {addressFields.map((field) => (
+            <div className="input-group" key={field.key}>
+              <label htmlFor={field.key}>{field.label}</label>
+              <input
+                id={field.key}
+                name={field.key}
+                type="text"
+                placeholder={field.placeholder}
+                required
+                autoComplete={
+                  field.key === "indirizzoOperativo"
+                    ? "address-line1"
+                    : "address-line2"
+                }
+              />
+            </div>
+          ))}
+        </div>
 
         <LocationFields resetKey={locationResetKey} />
 
@@ -226,6 +259,25 @@ export function PartnerForm() {
             )}
           </div>
         ))}
+      </div>
+
+      <div className="form-section form-section--notes">
+        <h3>Note aggiuntive</h3>
+        {FORM_FIELDS.filter((field) => field.section === "notes").map(
+          (field) => (
+            <div className="input-group" key={field.key}>
+              <label htmlFor={field.key}>{field.label}</label>
+              <textarea
+                id={field.key}
+                name={field.key}
+                placeholder={field.placeholder}
+                rows={4}
+                maxLength={2000}
+                required={field.required !== false}
+              />
+            </div>
+          ),
+        )}
       </div>
 
       <div className="hp-field" aria-hidden="true">

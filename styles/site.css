@@ -445,6 +445,19 @@ img {
   color: #b38f00;
 }
 
+.form-section--notes {
+  background: linear-gradient(
+    135deg,
+    rgba(0, 51, 160, 0.06),
+    rgba(0, 51, 160, 0.015)
+  );
+  border-color: rgba(0, 51, 160, 0.16);
+}
+
+.form-section--notes h3 {
+  color: var(--enova-primary);
+}
+
 .input-row {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -757,6 +770,10 @@ input:disabled {
 .detail-item strong {
   font-weight: 500;
   word-break: break-word;
+}
+
+.detail-item--full {
+  grid-column: 1 / -1;
 }
 
 .login-form {

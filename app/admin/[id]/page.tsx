@@ -111,9 +111,23 @@ export default async function AdminDetailPage({
             {operativoFields.map((field) => (
               <div className="detail-item" key={field.key}>
                 <span>{field.label}</span>
-                <strong>{submission[field.key]}</strong>
+                <strong>{submission[field.key] || "—"}</strong>
               </div>
             ))}
+          </div>
+        </div>
+
+        <div className="form-section form-section--notes">
+          <h3>Note aggiuntive</h3>
+          <div className="detail-grid">
+            <div className="detail-item detail-item--full">
+              <span>Note aggiuntive</span>
+              <strong style={{ whiteSpace: "pre-wrap" }}>
+                {submission.noteAggiuntive?.trim()
+                  ? submission.noteAggiuntive
+                  : "—"}
+              </strong>
+            </div>
           </div>
         </div>
 

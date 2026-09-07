@@ -12,6 +12,7 @@ Checklist operativa per allineare questo progetto a quanto già fatto su **Iren 
 
 - [x] Form candidatura + validazione Zod + honeypot + rate limit
 - [x] Campi Area Manager + telefono (esclusi dall’Excel, visibili in admin/email)
+- [x] Excel Plenitude Leader: Rag. Sociale, Partita IVA, Nome, Cognome, Indirizzo, Numero civico, CAP, Comune, Provincia, Regione
 - [x] Generazione Excel per candidatura
 - [x] Storage locale (`./data`) e Blob-ready (`lib/store.ts` + `lib/mailbox.ts`)
 - [x] Autocomplete comuni (`lib/data/comuni.json`)
@@ -25,8 +26,7 @@ Checklist operativa per allineare questo progetto a quanto già fatto su **Iren 
 
 ### Gap codice rispetto a Iren Corner (piccolo)
 
-- [ ] Campo facoltativo **Note aggiuntive** (`noteAggiuntive`) — presente su Iren Corner, non ancora portato qui  
-  File da allineare: `lib/fields.ts`, `lib/validation.ts`, `components/PartnerForm.tsx`, `app/api/submit/route.ts`, dettaglio admin
+- [x] Campo facoltativo **Note aggiuntive** (`noteAggiuntive`) — allineato a Iren Corner (textarea facoltativa, max 2000 caratteri, non in Excel, visibile in admin)
 
 ### Gap infrastruttura (come su Iren Corner online)
 
@@ -142,7 +142,7 @@ Dopo il deploy:
 
 ## Ordine consigliato (rapido)
 
-1. Portare `noteAggiuntive` (opzionale).
+1. ~~Portare `noteAggiuntive`~~ (fatto).
 2. Repo GitHub + push.
 3. Progetto Vercel.
 4. Blob nuovo.

@@ -2,6 +2,7 @@ export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 import { SubmissionTable } from "@/components/admin/SubmissionTable";
+import { titolareDisplayName } from "@/lib/fields";
 import { listSubmissions } from "@/lib/store";
 
 type AdminTab = "unread" | "read" | "trash";
@@ -28,11 +29,11 @@ export default async function AdminPage({
         submissions={submissions.map((submission) => ({
           id: submission.id,
           createdAt: submission.createdAt,
-          email: submission.email,
+          email: submission.email ?? "",
           telefono: submission.telefono ?? "",
           areaManagerNome: submission.areaManagerNome ?? "",
           areaManagerCognome: submission.areaManagerCognome ?? "",
-          nomeCognome: submission.nomeCognome ?? "",
+          nomeCognome: titolareDisplayName(submission),
           ragioneSociale: submission.ragioneSociale,
           partitaIva: submission.partitaIva,
           provincia: submission.provincia,

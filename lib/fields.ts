@@ -1,34 +1,28 @@
 export const EXCEL_HEADERS = [
-  "Indirizzo e-mail a cui inviare il contratto",
-  "Nome e Cognome titolare / Amministratore",
-  "Ragione sociale (come in visura camerale)",
+  "Rag. Sociale",
   "Partita IVA",
-  "Sede legale",
-  "Indirizzo (sede operativa)",
-  "Comune (sede operativa)",
-  "Cap (sede operativa)",
-  "Provincia (sede operativa)",
-  "Regione (sede operativa)",
-  "Tipologia attività",
-  "Esperienza settore energetico",
-  "Altri competitor presenti",
+  "Nome",
+  "Cognome",
+  "Indirizzo",
+  "Numero civico",
+  "CAP",
+  "Comune",
+  "Provincia",
+  "Regione",
 ] as const;
 
 /** Campi scritti nel file Excel generato. */
 export const FIELD_KEYS = [
-  "email",
-  "nomeCognome",
   "ragioneSociale",
   "partitaIva",
-  "sedeLegale",
+  "nome",
+  "cognome",
   "indirizzoOperativo",
-  "comune",
+  "numeroCivico",
   "cap",
+  "comune",
   "provincia",
   "regione",
-  "tipologiaAttivita",
-  "esperienzaEnergetico",
-  "altriCompetitor",
 ] as const;
 
 export type FieldKey = (typeof FIELD_KEYS)[number];
@@ -37,20 +31,41 @@ export type FieldKey = (typeof FIELD_KEYS)[number];
 export const ADMIN_ONLY_FIELD_KEYS = [
   "areaManagerNome",
   "areaManagerCognome",
+  "email",
   "telefono",
+  "sedeLegale",
+  "tipologiaAttivita",
+  "esperienzaEnergetico",
+  "altriCompetitor",
+  "noteAggiuntive",
+  "nomeCognome",
 ] as const;
 export type AdminOnlyFieldKey = (typeof ADMIN_ONLY_FIELD_KEYS)[number];
 export type FormFieldKey = FieldKey | AdminOnlyFieldKey;
 
 export const EXCEL_COLUMN_COUNT = FIELD_KEYS.length;
+export const EXCEL_LEGAL_COLUMN_COUNT = 4;
 export const EXCEL_RANGE = `A1:${String.fromCharCode(64 + EXCEL_COLUMN_COUNT)}2`;
+
+export function titolareDisplayName(data: {
+  nome?: string;
+  cognome?: string;
+  nomeCognome?: string;
+}) {
+  const combined = [data.nome, data.cognome]
+    .map((value) => value?.trim())
+    .filter(Boolean)
+    .join(" ");
+  return combined || data.nomeCognome?.trim() || "";
+}
 
 export const FORM_FIELDS: Array<{
   key: FormFieldKey;
   label: string;
-  section: "areaManager" | "legal" | "operativo";
+  section: "areaManager" | "legal" | "operativo" | "notes";
   type?: "text" | "email" | "tel" | "textarea" | "yesno";
   placeholder?: string;
+  required?: boolean;
   /** Se false, il campo non finisce nell'Excel generato. */
   includeInExcel?: boolean;
 }> = [
@@ -70,10 +85,11 @@ export const FORM_FIELDS: Array<{
   },
   {
     key: "email",
-    label: EXCEL_HEADERS[0],
+    label: "Indirizzo e-mail a cui inviare il contratto",
     section: "legal",
     type: "email",
     placeholder: "nome@azienda.it",
+    includeInExcel: false,
   },
   {
     key: "telefono",
@@ -84,76 +100,101 @@ export const FORM_FIELDS: Array<{
     includeInExcel: false,
   },
   {
-    key: "nomeCognome",
-    label: EXCEL_HEADERS[1],
+    key: "nome",
+    label: "Nome titolare / Amministratore",
     section: "legal",
-    placeholder: "Mario Rossi",
+    placeholder: "Mario",
+  },
+  {
+    key: "cognome",
+    label: "Cognome titolare / Amministratore",
+    section: "legal",
+    placeholder: "Rossi",
   },
   {
     key: "ragioneSociale",
-    label: EXCEL_HEADERS[2],
+    label: "Ragione sociale (come in visura camerale)",
     section: "legal",
     placeholder: "Azienda S.r.l.",
   },
   {
     key: "partitaIva",
-    label: EXCEL_HEADERS[3],
+    label: "Partita IVA",
     section: "legal",
     placeholder: "12345678901",
   },
   {
     key: "sedeLegale",
-    label: EXCEL_HEADERS[4],
+    label: "Sede legale",
     section: "legal",
     placeholder: "Via Roma 1, 00100 Roma (RM)",
+    includeInExcel: false,
   },
   {
     key: "indirizzoOperativo",
-    label: EXCEL_HEADERS[5],
+    label: "Indirizzo (sede operativa)",
     section: "operativo",
-    placeholder: "Via Milano 10",
+    placeholder: "Via Milano",
+  },
+  {
+    key: "numeroCivico",
+    label: "Numero civico",
+    section: "operativo",
+    placeholder: "10",
   },
   {
     key: "comune",
-    label: EXCEL_HEADERS[6],
+    label: "Comune (sede operativa)",
     section: "operativo",
     placeholder: "Milano",
   },
   {
     key: "cap",
-    label: EXCEL_HEADERS[7],
+    label: "Cap (sede operativa)",
     section: "operativo",
     placeholder: "20100",
   },
   {
     key: "provincia",
-    label: EXCEL_HEADERS[8],
+    label: "Provincia (sede operativa)",
     section: "operativo",
     placeholder: "MI",
   },
   {
     key: "regione",
-    label: EXCEL_HEADERS[9],
+    label: "Regione (sede operativa)",
     section: "operativo",
     placeholder: "Lombardia",
   },
   {
     key: "tipologiaAttivita",
-    label: EXCEL_HEADERS[10],
+    label: "Tipologia attività",
     section: "operativo",
     placeholder: "Agenzia immobiliare, negozio energia, ecc.",
+    includeInExcel: false,
   },
   {
     key: "esperienzaEnergetico",
-    label: EXCEL_HEADERS[11],
+    label: "Esperienza settore energetico",
     section: "operativo",
     type: "yesno",
+    includeInExcel: false,
   },
   {
     key: "altriCompetitor",
-    label: EXCEL_HEADERS[12],
+    label: "Altri competitor presenti",
     section: "operativo",
     type: "textarea",
     placeholder: "Elenca altri competitor presenti",
+    includeInExcel: false,
+  },
+  {
+    key: "noteAggiuntive",
+    label: "Note aggiuntive",
+    section: "notes",
+    type: "textarea",
+    placeholder: "Eventuali informazioni utili (facoltativo)",
+    required: false,
+    includeInExcel: false,
   },
 ];

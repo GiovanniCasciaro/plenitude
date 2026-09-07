@@ -1,5 +1,6 @@
 import { Resend } from "resend";
 import { getAdminSubmissionUrl } from "@/lib/app-url";
+import { titolareDisplayName } from "@/lib/fields";
 import type { Submission } from "@/lib/types";
 
 const DEFAULT_NOTIFIER_EMAIL = "codifiche@gruppoevolvia.it";
@@ -50,8 +51,8 @@ export async function notifyNewSubmission(
     "",
     `Area Manager: ${submission.areaManagerNome ?? ""} ${submission.areaManagerCognome ?? ""}`.trim(),
     `Ragione sociale: ${submission.ragioneSociale}`,
-    `Nome e cognome: ${submission.nomeCognome}`,
-    `Email: ${submission.email}`,
+    `Nome e cognome: ${titolareDisplayName(submission) || "—"}`,
+    `Email: ${submission.email ?? "—"}`,
     `Telefono: ${submission.telefono ?? "—"}`,
     `Partita IVA: ${submission.partitaIva}`,
     `Data invio: ${createdAt}`,
@@ -64,8 +65,8 @@ export async function notifyNewSubmission(
     <ul>
       <li><strong>Area Manager:</strong> ${escapeHtml(submission.areaManagerNome ?? "")} ${escapeHtml(submission.areaManagerCognome ?? "")}</li>
       <li><strong>Ragione sociale:</strong> ${escapeHtml(submission.ragioneSociale)}</li>
-      <li><strong>Nome e cognome:</strong> ${escapeHtml(submission.nomeCognome)}</li>
-      <li><strong>Email:</strong> ${escapeHtml(submission.email)}</li>
+      <li><strong>Nome e cognome:</strong> ${escapeHtml(titolareDisplayName(submission) || "—")}</li>
+      <li><strong>Email:</strong> ${escapeHtml(submission.email ?? "—")}</li>
       <li><strong>Telefono:</strong> ${escapeHtml(submission.telefono ?? "—")}</li>
       <li><strong>Partita IVA:</strong> ${escapeHtml(submission.partitaIva)}</li>
       <li><strong>Data invio:</strong> ${escapeHtml(createdAt)}</li>
