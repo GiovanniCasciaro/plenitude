@@ -7,11 +7,19 @@ export function SiteHeader() {
       <nav className="nav" aria-label="Navigazione principale">
         <Link className="logo" href="/" aria-label="Plenitude Dealer - Home">
           <Image
-            src="/assets/logo-plenitude.svg"
-            alt="Plenitude Dealer"
-            width={180}
-            height={176}
+            src="/assets/logo-plenitude.png"
+            alt="Plenitude"
+            width={262}
+            height={256}
             className="logo-image"
+            priority
+          />
+          <Image
+            src="/assets/logo-futuro-green.png"
+            alt="Futuro Green"
+            width={249}
+            height={256}
+            className="logo-image logo-image--partner"
             priority
           />
         </Link>

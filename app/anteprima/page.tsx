@@ -21,10 +21,17 @@ export default function AnteprimaPage() {
         <div className="preview-collage__body">
           <div className="preview-collage__brand">
             <Image
-              src="/assets/logo-plenitude.svg"
+              src="/assets/logo-plenitude.png"
               alt=""
-              width={180}
-              height={176}
+              width={262}
+              height={256}
+              aria-hidden="true"
+            />
+            <Image
+              src="/assets/logo-futuro-green.png"
+              alt=""
+              width={249}
+              height={256}
               aria-hidden="true"
             />
           </div>
