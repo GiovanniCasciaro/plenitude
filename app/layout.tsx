@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import { BackToTop } from "@/components/BackToTop";
 import { CookieConsent } from "@/components/CookieConsent";
 import "@/styles/site.css";
@@ -56,6 +57,7 @@ export default function RootLayout({
         {children}
         <CookieConsent />
         <BackToTop />
+        <Analytics />
       </body>
     </html>
   );
