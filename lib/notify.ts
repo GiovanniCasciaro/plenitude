@@ -24,15 +24,21 @@ function escapeHtml(value: string) {
     .replaceAll('"', "&quot;");
 }
 
+function envValue(name: string) {
+  const raw = process.env[name]?.trim();
+  if (!raw) return undefined;
+  return raw.replace(/^['"]|['"]$/g, "").trim() || undefined;
+}
+
 export function getNotifierEmail() {
-  return process.env.NOTIFIER_EMAIL ?? DEFAULT_NOTIFIER_EMAIL;
+  return envValue("NOTIFIER_EMAIL") ?? DEFAULT_NOTIFIER_EMAIL;
 }
 
 export async function notifyNewSubmission(
   submission: Submission,
   request?: Request,
 ) {
-  const apiKey = process.env.RESEND_API_KEY;
+  const apiKey = envValue("RESEND_API_KEY");
   if (!apiKey) {
     console.warn(
       "RESEND_API_KEY assente: notifica email non inviata.",
@@ -40,9 +46,16 @@ export async function notifyNewSubmission(
     return;
   }
 
+  if (!apiKey.startsWith("re_")) {
+    throw new Error(
+      "RESEND_API_KEY non valida: deve essere la chiave Resend (inizia con re_), non un URL o un altro valore.",
+    );
+  }
+
   const resend = new Resend(apiKey);
   const from =
-    process.env.RESEND_FROM ?? "Plenitude Dealer <onboarding@resend.dev>";
+    envValue("RESEND_FROM") ??
+    "Plenitude Dealer <noreply@plenitudedealerita.it>";
   const adminUrl = getAdminSubmissionUrl(submission.id, request);
   const createdAt = formatDate(submission.createdAt);
 
