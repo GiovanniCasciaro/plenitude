@@ -24,8 +24,9 @@ export function SiteHeader() {
           />
         </Link>
         <div className="nav-actions">
-          <a className="btn btn-primary btn-small" href="#candidatura">
-            Compila il form
+          <a className="btn btn-primary btn-small nav-cta" href="#candidatura">
+            <span className="nav-cta__full">Compila il form</span>
+            <span className="nav-cta__short">Candidati</span>
           </a>
         </div>
       </nav>

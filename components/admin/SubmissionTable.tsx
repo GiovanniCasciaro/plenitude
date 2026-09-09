@@ -474,27 +474,27 @@ export function SubmissionTable({
                       isUnread(submission) ? "admin-row--unread" : undefined
                     }
                   >
-                    <td>
+                    <td data-label="Data">
                       {new Date(submission.createdAt).toLocaleDateString(
                         "it-IT",
                       )}
                     </td>
-                    <td>{areaManager || "—"}</td>
-                    <td>{submission.nomeCognome || "—"}</td>
-                    <td>
+                    <td data-label="Area Manager">{areaManager || "—"}</td>
+                    <td data-label="Titolare">{submission.nomeCognome || "—"}</td>
+                    <td data-label="Ragione sociale">
                       {isUnread(submission) ? (
                         <strong>{submission.ragioneSociale}</strong>
                       ) : (
                         submission.ragioneSociale
                       )}
                     </td>
-                    <td>{submission.email}</td>
-                    <td>{submission.telefono || "—"}</td>
-                    <td>{submission.partitaIva}</td>
-                    <td>{submission.comune}</td>
-                    <td>{submission.provincia}</td>
-                    <td>{submission.regione || "—"}</td>
-                    <td>
+                    <td data-label="Email">{submission.email}</td>
+                    <td data-label="Telefono">{submission.telefono || "—"}</td>
+                    <td data-label="P.IVA">{submission.partitaIva}</td>
+                    <td data-label="Comune">{submission.comune}</td>
+                    <td data-label="Prov.">{submission.provincia}</td>
+                    <td data-label="Regione">{submission.regione || "—"}</td>
+                    <td data-label="Dettaglio">
                       <Link
                         className="btn btn-ghost btn-small"
                         href={`/admin/${submission.id}`}
@@ -503,7 +503,7 @@ export function SubmissionTable({
                         Dettaglio
                       </Link>
                     </td>
-                    <td>
+                    <td data-label="Excel">
                       <a
                         className="btn btn-primary btn-small"
                         href={getSubmissionExcelDownloadUrl(submission)}
@@ -511,7 +511,7 @@ export function SubmissionTable({
                         Scarica
                       </a>
                     </td>
-                    <td>
+                    <td data-label="Azioni">
                       <div className="admin-actions">
                         {section === "trash" ? (
                           <>

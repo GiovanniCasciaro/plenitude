@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import { BackToTop } from "@/components/BackToTop";
 import { CookieConsent } from "@/components/CookieConsent";
@@ -13,6 +13,12 @@ const siteUrl = process.env.APP_URL ?? "https://plenitudeleader.it";
 const siteTitle = "Plenitude Dealer — Collabora con noi";
 const siteDescription =
   "Programma commerciale Plenitude Dealer: offerte energia, provvigioni strutturate e form di candidatura partner per agenzie.";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
