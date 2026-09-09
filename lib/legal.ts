@@ -11,7 +11,7 @@ export function getLegalEntity(): LegalEntity {
   return {
     name:
       process.env.LEGAL_ENTITY_NAME?.trim() ||
-      "Plenitude Dealer",
+      "Futuro Green SRL",
     brand: "Plenitude Dealer",
     email:
       process.env.LEGAL_PRIVACY_EMAIL?.trim() ||
