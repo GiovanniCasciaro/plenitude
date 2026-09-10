@@ -58,7 +58,7 @@ export default function AnteprimaPage() {
             <div>
               <strong>Scopri Plenitude Dealer</strong>
               <br />
-              <span>plenitudeleader.it</span>
+              <span>plenitudedealerita.it</span>
             </div>
             <span className="preview-collage__cta-mark" aria-hidden="true">
               →

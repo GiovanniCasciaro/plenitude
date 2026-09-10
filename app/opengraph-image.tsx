@@ -76,7 +76,7 @@ export default function OpenGraphImage() {
             fontWeight: 600,
           }}
         >
-          plenitudeleader.it
+          plenitudedealerita.it
         </p>
       </div>
     ),

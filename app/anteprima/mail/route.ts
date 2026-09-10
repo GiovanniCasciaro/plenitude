@@ -76,7 +76,7 @@ export async function GET(request: Request) {
                     <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:14px;background:#009e62;border-radius:12px;">
                       <tr>
                         <td style="padding:16px 18px;font-family:Arial,Helvetica,sans-serif;">
-                          <a href="${siteUrl}" style="color:#ffffff;text-decoration:none;font-size:18px;font-weight:700;">Scopri Plenitude Dealer → plenitudeleader.it</a>
+                          <a href="${siteUrl}" style="color:#ffffff;text-decoration:none;font-size:18px;font-weight:700;">Scopri Plenitude Dealer → plenitudedealerita.it</a>
                         </td>
                       </tr>
                     </table>

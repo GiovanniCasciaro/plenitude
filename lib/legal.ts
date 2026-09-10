@@ -1,3 +1,5 @@
+import { getPublicAppUrl } from "@/lib/app-url";
+
 export type LegalEntity = {
   name: string;
   brand: string;
@@ -17,9 +19,7 @@ export function getLegalEntity(): LegalEntity {
       process.env.LEGAL_PRIVACY_EMAIL?.trim() ||
       process.env.NOTIFIER_EMAIL?.trim() ||
       "privacy@plenitudeleader.it",
-    siteUrl:
-      process.env.APP_URL?.trim().replace(/\/$/, "") ||
-      "https://plenitudeleader.it",
+    siteUrl: getPublicAppUrl(),
     address:
       process.env.LEGAL_ENTITY_ADDRESS?.trim() ||
       "Italia",

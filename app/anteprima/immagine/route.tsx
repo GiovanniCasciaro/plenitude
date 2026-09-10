@@ -181,7 +181,7 @@ export async function GET() {
                 Scopri Plenitude Dealer
               </p>
               <p style={{ display: "flex", fontSize: 16, opacity: 0.92 }}>
-                plenitudeleader.it
+                plenitudedealerita.it
               </p>
             </div>
             <div

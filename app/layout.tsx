@@ -9,7 +9,7 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
-const siteUrl = process.env.APP_URL ?? "https://plenitudeleader.it";
+const siteUrl = process.env.APP_URL ?? "https://plenitudedealerita.it";
 const siteTitle = "Plenitude Dealer — Collabora con noi";
 const siteDescription =
   "Programma commerciale Plenitude Dealer: offerte energia, provvigioni strutturate e form di candidatura partner per agenzie.";

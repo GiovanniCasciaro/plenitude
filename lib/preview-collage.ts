@@ -1,5 +1,6 @@
-export const PREVIEW_SITE_URL =
-  process.env.APP_URL?.replace(/\/$/, "") ?? "https://plenitudeleader.it";
+import { getPublicAppUrl } from "@/lib/app-url";
+
+export const PREVIEW_SITE_URL = getPublicAppUrl();
 
 export const PREVIEW_HEADLINE =
   "Energia, processi digitali e supporto dedicato per la tua agenzia o negozio";
