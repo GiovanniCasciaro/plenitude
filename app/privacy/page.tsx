@@ -49,7 +49,8 @@ export default function PrivacyPage() {
             <p>Possiamo trattare:</p>
             <ul>
               <li>
-                dati anagrafici e di contatto (nome, cognome, email, indirizzo);
+                dati anagrafici e di contatto (nome, cognome, codice fiscale,
+                data di nascita, email, telefono, indirizzo di residenza);
               </li>
               <li>
                 dati aziendali (ragione sociale, Partita IVA, sede legale e

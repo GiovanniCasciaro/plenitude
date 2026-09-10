@@ -85,9 +85,20 @@ export function PartnerForm() {
   const titolareFields = legalFields.filter((field) =>
     ["nome", "cognome"].includes(field.key),
   );
+  const titolareIdFields = legalFields.filter((field) =>
+    ["codiceFiscale", "dataNascita"].includes(field.key),
+  );
   const remainingLegalFields = legalFields.filter(
     (field) =>
-      !["email", "telefono", "nome", "cognome"].includes(field.key),
+      ![
+        "email",
+        "telefono",
+        "nome",
+        "cognome",
+        "codiceFiscale",
+        "dataNascita",
+        "indirizzoResidenza",
+      ].includes(field.key),
   );
   const profileFields = FORM_FIELDS.filter(
     (field) =>
@@ -171,6 +182,56 @@ export function PartnerForm() {
               />
             </div>
           ))}
+        </div>
+        <div className="input-row">
+          {titolareIdFields.map((field) => (
+            <div className="input-group" key={field.key}>
+              <label htmlFor={field.key}>{field.label}</label>
+              {field.key === "codiceFiscale" ? (
+                <input
+                  id={field.key}
+                  name={field.key}
+                  className="input-cf"
+                  type="text"
+                  placeholder={field.placeholder}
+                  required
+                  minLength={16}
+                  maxLength={16}
+                  spellCheck={false}
+                  autoComplete="off"
+                  autoCapitalize="characters"
+                  inputMode="text"
+                  pattern="[A-Za-z]{6}[0-9LlMmNnPpQqRrSsTtUuVv]{2}[A-Za-z][0-9LlMmNnPpQqRrSsTtUuVv]{2}[A-Za-z][0-9LlMmNnPpQqRrSsTtUuVv]{3}[A-Za-z]"
+                  title="16 caratteri: codice fiscale italiano valido"
+                />
+              ) : (
+                <input
+                  id={field.key}
+                  name={field.key}
+                  type="text"
+                  placeholder={field.placeholder}
+                  required
+                  inputMode="numeric"
+                  autoComplete="bday"
+                  pattern="(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/(19|20)[0-9]{2}"
+                  title="Formato GG/MM/AAAA"
+                />
+              )}
+            </div>
+          ))}
+        </div>
+        <div className="input-group">
+          <label htmlFor="indirizzoResidenza">
+            Indirizzo di residenza titolare / Amministratore
+          </label>
+          <input
+            id="indirizzoResidenza"
+            name="indirizzoResidenza"
+            type="text"
+            placeholder="Via Roma 10, 00100 Roma (RM)"
+            required
+            autoComplete="street-address"
+          />
         </div>
         {remainingLegalFields.map((field) => (
           <div className="input-group" key={field.key}>

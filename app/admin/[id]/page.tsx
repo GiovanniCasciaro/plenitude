@@ -97,7 +97,14 @@ export default async function AdminDetailPage({
           <h3>Dati legali e contatto</h3>
           <div className="detail-grid">
             {legalFields.map((field) => (
-              <div className="detail-item" key={field.key}>
+              <div
+                className={
+                  field.key === "indirizzoResidenza" || field.key === "sedeLegale"
+                    ? "detail-item detail-item--full"
+                    : "detail-item"
+                }
+                key={field.key}
+              >
                 <span>{field.label}</span>
                 <strong>{submission[field.key] || "—"}</strong>
               </div>

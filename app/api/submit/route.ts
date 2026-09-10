@@ -76,6 +76,11 @@ export async function POST(request: Request) {
       telefono: String(formData.get("telefono") ?? "").trim(),
       nome: String(formData.get("nome") ?? "").trim(),
       cognome: String(formData.get("cognome") ?? "").trim(),
+      codiceFiscale: String(formData.get("codiceFiscale") ?? "")
+        .replace(/\s/g, "")
+        .toUpperCase(),
+      indirizzoResidenza: String(formData.get("indirizzoResidenza") ?? "").trim(),
+      dataNascita: String(formData.get("dataNascita") ?? "").trim(),
       ragioneSociale: String(formData.get("ragioneSociale") ?? ""),
       partitaIva: String(formData.get("partitaIva") ?? "").replace(/\s/g, ""),
       sedeLegale: String(formData.get("sedeLegale") ?? ""),

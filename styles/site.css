@@ -589,6 +589,11 @@ input:read-only {
   cursor: default;
 }
 
+.input-cf {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
 .field-hint {
   margin: 0;
   font-size: 0.78rem;
