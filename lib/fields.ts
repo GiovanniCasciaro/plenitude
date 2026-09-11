@@ -36,6 +36,7 @@ export const ADMIN_ONLY_FIELD_KEYS = [
   "codiceFiscale",
   "indirizzoResidenza",
   "dataNascita",
+  "luogoNascita",
   "sedeLegale",
   "tipologiaAttivita",
   "esperienzaEnergetico",
@@ -133,6 +134,13 @@ export const FORM_FIELDS: Array<{
     label: "Data di nascita titolare / Amministratore",
     section: "legal",
     placeholder: "GG/MM/AAAA",
+    includeInExcel: false,
+  },
+  {
+    key: "luogoNascita",
+    label: "Luogo di nascita titolare / Amministratore",
+    section: "legal",
+    placeholder: "Roma",
     includeInExcel: false,
   },
   {

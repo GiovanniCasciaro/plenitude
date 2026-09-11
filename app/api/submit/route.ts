@@ -81,6 +81,7 @@ export async function POST(request: Request) {
         .toUpperCase(),
       indirizzoResidenza: String(formData.get("indirizzoResidenza") ?? "").trim(),
       dataNascita: String(formData.get("dataNascita") ?? "").trim(),
+      luogoNascita: String(formData.get("luogoNascita") ?? "").trim(),
       ragioneSociale: String(formData.get("ragioneSociale") ?? ""),
       partitaIva: String(formData.get("partitaIva") ?? "").replace(/\s/g, ""),
       sedeLegale: String(formData.get("sedeLegale") ?? ""),

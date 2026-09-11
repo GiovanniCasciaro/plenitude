@@ -50,7 +50,8 @@ export default function PrivacyPage() {
             <ul>
               <li>
                 dati anagrafici e di contatto (nome, cognome, codice fiscale,
-                data di nascita, email, telefono, indirizzo di residenza);
+                data e luogo di nascita, email, telefono, indirizzo di
+                residenza);
               </li>
               <li>
                 dati aziendali (ragione sociale, Partita IVA, sede legale e

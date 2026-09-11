@@ -52,6 +52,10 @@ export const submissionSchema = z
         isValidBirthDate,
         "Inserisci una data di nascita valida nel formato GG/MM/AAAA.",
       ),
+    luogoNascita: z
+      .string()
+      .trim()
+      .min(2, "Inserisci il luogo di nascita del titolare / amministratore."),
     ragioneSociale: z.string().min(2, "Inserisci la ragione sociale."),
     partitaIva: z
       .string()
