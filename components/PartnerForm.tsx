@@ -1,8 +1,9 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState, type FormEvent } from "react";
+import { useEffect, useState, type ChangeEvent, type FormEvent } from "react";
 import { LocationFields } from "@/components/LocationFields";
+import { formatItalianDateInput } from "@/lib/date-it";
 import { FORM_FIELDS } from "@/lib/fields";
 import { SUBMIT_SUCCESS_MESSAGE } from "@/lib/submit-messages";
 
@@ -10,10 +11,17 @@ export function PartnerForm() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [locationResetKey, setLocationResetKey] = useState(0);
+  const [dataNascita, setDataNascita] = useState("");
   const [status, setStatus] = useState<{
     type: "idle" | "loading" | "success" | "error";
     message: string;
   }>({ type: "idle", message: "" });
+
+  function handleDataNascitaChange(event: ChangeEvent<HTMLInputElement>) {
+    setDataNascita((previous) =>
+      formatItalianDateInput(event.target.value, previous),
+    );
+  }
 
   useEffect(() => {
     if (searchParams.get("submitted") === "1") {
@@ -66,6 +74,7 @@ export function PartnerForm() {
         message: data.message,
       });
       form.reset();
+      setDataNascita("");
       setLocationResetKey((value) => value + 1);
     } catch {
       setStatus({
@@ -221,8 +230,11 @@ export function PartnerForm() {
                   type="text"
                   placeholder={field.placeholder}
                   required
+                  value={dataNascita}
+                  onChange={handleDataNascitaChange}
                   inputMode="numeric"
                   autoComplete="bday"
+                  maxLength={10}
                   pattern="(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/(19|20)[0-9]{2}"
                   title="Formato GG/MM/AAAA"
                 />

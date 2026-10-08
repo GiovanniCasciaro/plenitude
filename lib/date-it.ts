@@ -7,6 +7,40 @@ export type ParsedItalianDate = {
   date: Date;
 };
 
+/**
+ * Formats a birth-date input as GG/MM/AAAA while typing (digits only, max 8).
+ * Inserts `/` right after day (2 digits) and month (2 digits) when typing forward.
+ * `previous` avoids re-adding `/` when the user deletes.
+ */
+export function formatItalianDateInput(
+  value: string,
+  previous = "",
+): string {
+  const digits = value.replace(/\D/g, "").slice(0, 8);
+  const previousDigits = previous.replace(/\D/g, "");
+  const isAddingDigits = digits.length > previousDigits.length;
+
+  let formatted: string;
+  if (digits.length <= 2) {
+    formatted = digits;
+  } else if (digits.length <= 4) {
+    formatted = `${digits.slice(0, 2)}/${digits.slice(2)}`;
+  } else {
+    formatted = `${digits.slice(0, 2)}/${digits.slice(2, 4)}/${digits.slice(4)}`;
+  }
+
+  // Add trailing `/` only while typing forward after day or month is complete.
+  if (
+    isAddingDigits &&
+    (digits.length === 2 || digits.length === 4) &&
+    !formatted.endsWith("/")
+  ) {
+    formatted += "/";
+  }
+
+  return formatted;
+}
+
 export function parseItalianDate(value: string): ParsedItalianDate | null {
   const match = value.trim().match(ITALIAN_DATE_PATTERN);
   if (!match) return null;
