@@ -5,12 +5,14 @@ export type AddressSuggestion = {
   label: string;
   street: string;
   housenumber: string;
+  /** Street + civico only, for the address input cell: "Via Roma 10" */
+  streetLine: string;
   postcode: string;
   city: string;
   provinceSigla: string;
   provinceName: string;
   region: string;
-  /** Full Italian-style address: "Via Roma 10, 00100 Milano (MI)" */
+  /** Full label for search UI: "Via Roma 10, 00100 Milano (MI)" */
   formatted: string;
 };
 
@@ -120,10 +122,11 @@ function provinceSiglaFromIso(iso: string | undefined) {
   return match?.[1] ?? "";
 }
 
+function buildStreetLine(street: string, housenumber: string) {
+  return [street, housenumber].filter(Boolean).join(" ");
+}
+
 function buildLabel(suggestion: Omit<AddressSuggestion, "id" | "label">) {
-  const line = [suggestion.street, suggestion.housenumber]
-    .filter(Boolean)
-    .join(" ");
   const locality = [
     suggestion.postcode,
     suggestion.city,
@@ -131,7 +134,7 @@ function buildLabel(suggestion: Omit<AddressSuggestion, "id" | "label">) {
   ]
     .filter(Boolean)
     .join(" ");
-  return [line, locality].filter(Boolean).join(", ");
+  return [suggestion.streetLine, locality].filter(Boolean).join(", ");
 }
 
 function toSuggestion(result: NominatimResult): AddressSuggestion | null {
@@ -157,9 +160,11 @@ function toSuggestion(result: NominatimResult): AddressSuggestion | null {
 
   if (!street && !city) return null;
 
+  const streetValue = street || city;
   const base = {
-    street: street || city,
+    street: streetValue,
     housenumber,
+    streetLine: buildStreetLine(streetValue, housenumber),
     postcode,
     city,
     provinceSigla: province?.sigla ?? isoSigla,

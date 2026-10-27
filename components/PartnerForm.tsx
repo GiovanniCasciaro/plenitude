@@ -36,7 +36,7 @@ export function PartnerForm() {
   }
 
   function applyOperativoAddress(suggestion: AddressSuggestion) {
-    setIndirizzoOperativo(suggestion.street || suggestion.formatted);
+    setIndirizzoOperativo(suggestion.street || suggestion.streetLine);
     if (suggestion.housenumber) {
       setNumeroCivico(suggestion.housenumber);
     }
@@ -293,7 +293,7 @@ export function PartnerForm() {
             name="indirizzoResidenza"
             value={indirizzoResidenza}
             onChange={setIndirizzoResidenza}
-            onSelect={(suggestion) => setIndirizzoResidenza(suggestion.formatted)}
+            onSelect={(suggestion) => setIndirizzoResidenza(suggestion.streetLine)}
             placeholder="Via Roma 10, 00100 Roma (RM)"
             required
             autoComplete="street-address"
@@ -318,7 +318,7 @@ export function PartnerForm() {
             name="sedeLegale"
             value={sedeLegale}
             onChange={setSedeLegale}
-            onSelect={(suggestion) => setSedeLegale(suggestion.formatted)}
+            onSelect={(suggestion) => setSedeLegale(suggestion.streetLine)}
             placeholder="Via Roma 1, 00100 Roma (RM)"
             required
             autoComplete="off"
