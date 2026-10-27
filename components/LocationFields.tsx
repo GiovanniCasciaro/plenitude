@@ -8,7 +8,20 @@ type ComuneOption = {
   cap: string[];
 };
 
-export function LocationFields({ resetKey = 0 }: { resetKey?: number }) {
+export type LocationPreset = {
+  regione: string;
+  provincia: string;
+  comune: string;
+  cap: string;
+};
+
+export function LocationFields({
+  resetKey = 0,
+  preset = null,
+}: {
+  resetKey?: number;
+  preset?: LocationPreset | null;
+}) {
   const [regione, setRegione] = useState("");
   const [provincia, setProvincia] = useState("");
   const [comune, setComune] = useState("");
@@ -16,6 +29,9 @@ export function LocationFields({ resetKey = 0 }: { resetKey?: number }) {
   const [capOptions, setCapOptions] = useState<string[]>([]);
   const [comuni, setComuni] = useState<ComuneOption[]>([]);
   const [loadingComuni, setLoadingComuni] = useState(false);
+  const [pendingPreset, setPendingPreset] = useState<LocationPreset | null>(
+    null,
+  );
 
   useEffect(() => {
     setRegione("");
@@ -24,7 +40,18 @@ export function LocationFields({ resetKey = 0 }: { resetKey?: number }) {
     setCap("");
     setCapOptions([]);
     setComuni([]);
+    setPendingPreset(null);
   }, [resetKey]);
+
+  useEffect(() => {
+    if (!preset) return;
+    setRegione(preset.regione);
+    setProvincia(preset.provincia);
+    setPendingPreset(preset);
+    setComune("");
+    setCap("");
+    setCapOptions([]);
+  }, [preset]);
 
   const provinces = useMemo(
     () => (regione ? provincesForRegion(regione) : []),
@@ -61,6 +88,30 @@ export function LocationFields({ resetKey = 0 }: { resetKey?: number }) {
     return () => controller.abort();
   }, [provincia]);
 
+  useEffect(() => {
+    if (!pendingPreset || loadingComuni || comuni.length === 0) return;
+    if (pendingPreset.provincia !== provincia) return;
+
+    const match = comuni.find(
+      (item) =>
+        item.nome.toLowerCase() === pendingPreset.comune.trim().toLowerCase(),
+    );
+
+    if (match) {
+      const caps = match.cap.filter(Boolean);
+      setComune(match.nome);
+      setCapOptions(caps);
+      const preferredCap = pendingPreset.cap.trim();
+      setCap(
+        preferredCap && caps.includes(preferredCap)
+          ? preferredCap
+          : (caps[0] ?? ""),
+      );
+    }
+
+    setPendingPreset(null);
+  }, [pendingPreset, loadingComuni, comuni, provincia]);
+
   function applyComuneSelection(value: string) {
     setComune(value);
 
@@ -91,6 +142,7 @@ export function LocationFields({ resetKey = 0 }: { resetKey?: number }) {
     setComune("");
     setCap("");
     setCapOptions([]);
+    setPendingPreset(null);
   }
 
   function handleProvinceChange(value: string) {
@@ -98,6 +150,7 @@ export function LocationFields({ resetKey = 0 }: { resetKey?: number }) {
     setComune("");
     setCap("");
     setCapOptions([]);
+    setPendingPreset(null);
   }
 
   const capLocked = Boolean(comune) && capOptions.length === 1;

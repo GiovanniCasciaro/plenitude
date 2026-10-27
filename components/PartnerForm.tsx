@@ -2,7 +2,12 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState, type ChangeEvent, type FormEvent } from "react";
-import { LocationFields } from "@/components/LocationFields";
+import { AddressAutocomplete } from "@/components/AddressAutocomplete";
+import {
+  LocationFields,
+  type LocationPreset,
+} from "@/components/LocationFields";
+import type { AddressSuggestion } from "@/lib/address-suggest";
 import { formatItalianDateInput } from "@/lib/date-it";
 import { FORM_FIELDS } from "@/lib/fields";
 import { SUBMIT_SUCCESS_MESSAGE } from "@/lib/submit-messages";
@@ -11,7 +16,14 @@ export function PartnerForm() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [locationResetKey, setLocationResetKey] = useState(0);
+  const [locationPreset, setLocationPreset] = useState<LocationPreset | null>(
+    null,
+  );
   const [dataNascita, setDataNascita] = useState("");
+  const [indirizzoResidenza, setIndirizzoResidenza] = useState("");
+  const [sedeLegale, setSedeLegale] = useState("");
+  const [indirizzoOperativo, setIndirizzoOperativo] = useState("");
+  const [numeroCivico, setNumeroCivico] = useState("");
   const [status, setStatus] = useState<{
     type: "idle" | "loading" | "success" | "error";
     message: string;
@@ -21,6 +33,21 @@ export function PartnerForm() {
     setDataNascita((previous) =>
       formatItalianDateInput(event.target.value, previous),
     );
+  }
+
+  function applyOperativoAddress(suggestion: AddressSuggestion) {
+    setIndirizzoOperativo(suggestion.street || suggestion.formatted);
+    if (suggestion.housenumber) {
+      setNumeroCivico(suggestion.housenumber);
+    }
+    if (suggestion.region && suggestion.provinceSigla) {
+      setLocationPreset({
+        regione: suggestion.region,
+        provincia: suggestion.provinceSigla,
+        comune: suggestion.city,
+        cap: suggestion.postcode,
+      });
+    }
   }
 
   useEffect(() => {
@@ -75,6 +102,11 @@ export function PartnerForm() {
       });
       form.reset();
       setDataNascita("");
+      setIndirizzoResidenza("");
+      setSedeLegale("");
+      setIndirizzoOperativo("");
+      setNumeroCivico("");
+      setLocationPreset(null);
       setLocationResetKey((value) => value + 1);
     } catch {
       setStatus({
@@ -111,6 +143,7 @@ export function PartnerForm() {
         "dataNascita",
         "luogoNascita",
         "indirizzoResidenza",
+        "sedeLegale",
       ].includes(field.key),
   );
   const profileFields = FORM_FIELDS.filter(
@@ -255,10 +288,12 @@ export function PartnerForm() {
           <label htmlFor="indirizzoResidenza">
             Indirizzo di residenza titolare / Amministratore
           </label>
-          <input
+          <AddressAutocomplete
             id="indirizzoResidenza"
             name="indirizzoResidenza"
-            type="text"
+            value={indirizzoResidenza}
+            onChange={setIndirizzoResidenza}
+            onSelect={(suggestion) => setIndirizzoResidenza(suggestion.formatted)}
             placeholder="Via Roma 10, 00100 Roma (RM)"
             required
             autoComplete="street-address"
@@ -276,31 +311,59 @@ export function PartnerForm() {
             />
           </div>
         ))}
+        <div className="input-group">
+          <label htmlFor="sedeLegale">Sede legale</label>
+          <AddressAutocomplete
+            id="sedeLegale"
+            name="sedeLegale"
+            value={sedeLegale}
+            onChange={setSedeLegale}
+            onSelect={(suggestion) => setSedeLegale(suggestion.formatted)}
+            placeholder="Via Roma 1, 00100 Roma (RM)"
+            required
+            autoComplete="off"
+          />
+        </div>
       </div>
 
       <div className="form-section form-section--operativo">
         <h3>Sede operativa e profilo commerciale</h3>
         <div className="input-row">
-          {addressFields.map((field) => (
-            <div className="input-group" key={field.key}>
-              <label htmlFor={field.key}>{field.label}</label>
-              <input
-                id={field.key}
-                name={field.key}
-                type="text"
-                placeholder={field.placeholder}
-                required
-                autoComplete={
-                  field.key === "indirizzoOperativo"
-                    ? "address-line1"
-                    : "address-line2"
-                }
-              />
-            </div>
-          ))}
+          {addressFields.map((field) =>
+            field.key === "indirizzoOperativo" ? (
+              <div className="input-group" key={field.key}>
+                <label htmlFor={field.key}>{field.label}</label>
+                <AddressAutocomplete
+                  id={field.key}
+                  name={field.key}
+                  value={indirizzoOperativo}
+                  onChange={setIndirizzoOperativo}
+                  onSelect={applyOperativoAddress}
+                  placeholder={field.placeholder}
+                  required
+                  autoComplete="address-line1"
+                  hint="Seleziona un suggerimento per compilare anche civico, comune e CAP."
+                />
+              </div>
+            ) : (
+              <div className="input-group" key={field.key}>
+                <label htmlFor={field.key}>{field.label}</label>
+                <input
+                  id={field.key}
+                  name={field.key}
+                  type="text"
+                  value={numeroCivico}
+                  onChange={(event) => setNumeroCivico(event.target.value)}
+                  placeholder={field.placeholder}
+                  required
+                  autoComplete="address-line2"
+                />
+              </div>
+            ),
+          )}
         </div>
 
-        <LocationFields resetKey={locationResetKey} />
+        <LocationFields resetKey={locationResetKey} preset={locationPreset} />
 
         {remainingProfileFields.map((field) => (
           <div className="input-group" key={field.key}>
